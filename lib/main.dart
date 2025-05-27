@@ -49,13 +49,13 @@ class TopBar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Image.asset('assets/images/msg.png'),
+                IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border,size: 25,),)
               ],
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: [IconButton(onPressed: () {}, icon: Icon(Icons.message))],
+            children: [Image.asset('assets/images/msg.png',width: 25,),],
           ),
         ],
       ),
@@ -70,7 +70,7 @@ class Story extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 3,
+      itemCount: 8,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
         return Row(
@@ -81,9 +81,20 @@ class Story extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: 30,
+                Container(
+
+                  decoration: BoxDecoration(gradient: LinearGradient(colors: [
+                    Color(0xFFf9ce34),
+                    Color(0xFFee2a7b),
+                    Color(0xFF6228d7),
+                  ]),shape: BoxShape.circle),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      radius: 30,
+                    ),
+                  ),
                 ),
                 Text("username"),
               ],
@@ -113,7 +124,7 @@ class YourStory extends StatelessWidget {
               bottom: 5,
               left: 40,
               child: CircleAvatar(
-                radius: 7,
+                radius: 10,
                 backgroundColor: Colors.blue,
                 child: Icon(Icons.add, size: 10),
               ),
@@ -125,6 +136,93 @@ class YourStory extends StatelessWidget {
     );
   }
 }
+
+// --------post section --------
+class Posts extends StatelessWidget {
+  const Posts({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 5,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Container(
+                    decoration: BoxDecoration(gradient: LinearGradient(colors: [
+                      Color(0xFFf9ce34),
+                      Color(0xFFee2a7b),
+                      Color(0xFF6228d7),
+                    ]),shape: BoxShape.circle),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: CircleAvatar(
+                        foregroundImage: AssetImage("assets/images/person.jpg",),
+                        radius: 15,
+                      ),
+                    ),
+                  ),
+                ),
+                Text("username"),
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [IconButton(onPressed: (){}, icon: Icon(Icons.more_vert))],
+                ))
+
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 400,
+                    color: Colors.grey[200],
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    IconButton(onPressed: (){}, icon: Image.asset("assets/images/heart.png",width: 25)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    IconButton(onPressed: (){}, icon: Image.asset("assets/images/chat.png",width: 25)),
+
+                  ],
+                ),
+                Column(
+                  children: [
+                    IconButton(onPressed: (){}, icon: Image.asset("assets/images/send.png",width: 25)),
+                  ],
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+
+                    children: [
+                      IconButton(onPressed: (){}, icon: Image.asset("assets/images/bookmark.png",width: 25)),
+                    ],
+                  ),
+                )
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+}
+
+
 
 //----------MAIN PAGE---------------
 class _MyHomePageState extends State<MyHomePage> {
@@ -143,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 100,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -152,8 +250,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Divider(height: 10),
-            Expanded(child: SizedBox()),
-            Divider(height: 10),
+           Expanded(
+             child: SizedBox(
+               height: 300,
+               child: Column(children: [Expanded(child: Posts())],),
+             ),
+           )
           ],
         ),
 
@@ -170,14 +272,13 @@ class bottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 40,
+      spacing: 30,
       children: [
-        IconButton(onPressed: (){}, icon: Image.asset("assets/images/home.png",width: 10,height: 10,)),
-        IconButton(onPressed: (){}, icon: Image.asset("images/search-interface-symbol.png",width: 10,height: 10,)),
-        IconButton(onPressed: (){}, icon: Image.asset("images/more.png",width: 10,height: 10,)),
-        IconButton(onPressed: (){}, icon: Image.asset("images/reel.png",width: 10,height: 10,)),
-        IconButton(onPressed: (){}, icon: Image.asset("images/user.png",width: 10,height: 10,)),
+        IconButton(onPressed: (){}, icon: Image.asset("assets/images/home.png",width: 25)),
+        IconButton(onPressed: (){}, icon: Image.asset("assets/images/search.png",width: 25)),
+        IconButton(onPressed: (){}, icon: Image.asset("assets/images/more.png",width: 25)),
+        IconButton(onPressed: (){}, icon: Image.asset("assets/images/reel.png",width: 25)),
+        IconButton(onPressed: (){}, icon: Image.asset("assets/images/user.png",width: 25)),
       ],
     );
   }
